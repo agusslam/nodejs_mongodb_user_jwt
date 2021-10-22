@@ -7,7 +7,8 @@ var jsonParser = bodyParser.json()
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 //API
-routes.get('/user-api-get', userControl.home)
+// routes.get('/user-api-get', userControl.home)
+routes.get('/user-api-get', userControl.userData)
 routes.post('/user-api-post', userControl.new)
 routes.post('/user-api-delete', userControl.del)
 routes.post('/user-api-login', userControl.login)

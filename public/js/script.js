@@ -1,9 +1,34 @@
+//get cookie
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
 // script for fetching data all
 const getData = async () => {
     try {
-        const response = await fetch('/user-api-get')
-        const allData = await response.json()
-        return allData
+        let dataCookie = JSON.parse(getCookie('_secure'))
+        // console.log(dataCookie.result.token)
+        const response = await fetch('/user-api-get',
+            {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${dataCookie.result.token}`
+                }
+            })
+        if(response !== false) {
+            const allData = await response.json()
+            return allData
+        }else { console.log("error")}
+        
     } catch (err) {
         console.error(err.message)
     }
@@ -57,16 +82,6 @@ getData()
         
     }).catch(err => {console.error(err)})
 
-function getCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
-}
 
 let dataCookie = JSON.parse(getCookie('_secure'))
 let loginData = document.querySelector('.userNow')

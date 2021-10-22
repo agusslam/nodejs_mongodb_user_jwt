@@ -73,7 +73,46 @@ exports.login = async(req,res) => {
     }    
 }
 
+exports.userData = async(req,res) => {
+    let tokenAuth = req.headers.authorization
+    //check token
+    if ( tokenAuth === undefined || tokenAuth === null || tokenAuth === '' ){
+        res.status(403).send({ message: `failed get data`, status: 403 })
+    }else {
+        //split token
+        let newTokenAuth = tokenAuth.split(' ')
 
+        //cek token is bearer
+        if ( newTokenAuth[0] != 'Bearer' ){
+            res.status(403).send({ message: `failed get data`, status: 403 })
+        }else {
+            //cek token
+            const token = jwt.verify(newTokenAuth[1], 'keyRahasia', (err,result) => {
+                if(err) return false
+                if(result) return result
+            })
+            //aksi jika true atau false
+            if(!token){
+                res.status(401).send({ message: `failed get data`, status: 401 })
+            }else{
+                //data yg dikeluarkan bisa apa aja
+                // const allData = await userModel.find()
+                // res.send({ message: "Success Get Data", result: allData });
+                userModel.find().then(response => {
+                    res.send({
+                        message: 'Success get data permissions',
+                        result: response,
+                        status: 200
+                    })
+                })
+                .catch(err => {
+                    res.status(500).send({ message: `failed get data`, status: 500 })
+                })
+            }
+
+        }
+    }
+}
 
 //FRONT END
 exports.vIndex = (req,res) => {
@@ -83,3 +122,4 @@ exports.vIndex = (req,res) => {
 exports.vLogin = (req,res) => {
     res.render('login')
 }
+
