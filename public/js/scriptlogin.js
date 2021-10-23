@@ -31,16 +31,17 @@ btnLogin.addEventListener('click', async () => {
                 'Content-Type': 'application/json',
                 },
         body: JSON.stringify({username: username, password: password})
-        });
-    const userNow = await getUser.json();
-    // console.log(userNow.status)
-    if(userNow.status === 200){
-        alert("Great!!! You're success login")
-        setCookie('_secure', JSON.stringify(userNow),7)
-        window.location.href = '/user-view'
-    }else { 
-        alert("Wrong Username / Password")
-        location.reload()
-     }
+        }).then(response => {return response.json()}).catch(err => {return "error"})
+        console.log(getUser)
+        if(getUser.auth !== false){
+            alert("Great!! Successfuly Login")
+            let dataCook = getUser.result
+            // console.log(getUser)
+            setCookie('_SpaidRE', JSON.stringify(dataCook),7)
+            window.location.href = '/user-view'
+        }else{
+            alert("Wrong Username/Password")
+            location.reload()
+        }
 })
 

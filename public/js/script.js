@@ -10,24 +10,26 @@ function getCookie(name) {
     return null;
 }
 
+
 // script for fetching data all
 const getData = async () => {
     try {
-        let dataCookie = JSON.parse(getCookie('_secure'))
-        // console.log(dataCookie.result.token)
-        const response = await fetch('/user-api-get',
+        let dataCookie = JSON.parse(getCookie('_SpaidRE'))
+        // console.log(dataCookie)
+        const getRes = await fetch('/user-api-get',
             {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${dataCookie.result.token}`
+                    'Authorization': `Bearer ${dataCookie}`
                 }
-            })
-        if(response !== false) {
-            const allData = await response.json()
-            return allData
-        }else { console.log("error")}
+            }).then(response => {return response.json()}).catch(err => {return false})
+        if(getRes.auth !== false) {
+            return getRes
+        }else { 
+            window.location.href = '/user-login' 
+        }
         
     } catch (err) {
         console.error(err.message)
@@ -38,20 +40,39 @@ getData()
     .then(async allData => {
         const getLis = document.querySelector('#list-data')        
         let lisData = allData.result
+        // console.log(allData.auth)
         //show List Data
-        await lisData.forEach((item,index) => {
-            getLis.innerHTML += `
-                                <tr>
-                                    <input type="hidden" id="iduser${index}" value="`+ item._id + `">
-                                    <th scope="row">${index+1}</th>                                
-                                    <td>${item.username}</td>
-                                    <td>${item.email}</td>
-                                    <td>${item.age}</td>
-                                    <td>${item.address}</td>
-                                    <td><button id="ubah${index}" class="btn-aksi">Ubah</button> | <button id="hapus${index}" class="btn-aksi2">Hapus</button></td>
-                                </tr>           
-                                 `
-        });       
+        if(allData.auth == 'member'){
+            await lisData.forEach((item,index) => {
+                getLis.innerHTML += `
+                                    <tr>
+                                        <input type="hidden" id="iduser${index}" value="`+ item._id + `">
+                                        <th scope="row">${index+1}</th>                                
+                                        <td>${item.username}</td>
+                                        <td>${item.email}</td>
+                                        <td>${item.age}</td>
+                                        <td>${item.address}</td>
+                                        <td><button id="ubah${index}" class="btn-aksi">Ubah</button> | <button id="hapus${index}" class="btn-aksi2">Hapus</button></td>
+                                    </tr>           
+                                     `
+            }); 
+        }else{
+            hideColAksi = document.querySelector('.col-aksi')
+            hideColAksi.classList.add("hide");
+            await lisData.forEach((item,index) => {
+                getLis.innerHTML += `
+                                    <tr>
+                                        <input type="hidden" id="iduser${index}" value="`+ item._id + `">
+                                        <th scope="row">${index+1}</th>                                
+                                        <td>${item.username}</td>
+                                        <td>${item.email}</td>
+                                        <td>${item.age}</td>
+                                        <td>${item.address}</td>
+                                    </tr>           
+                                     `
+            }); 
+        }
+              
         // btn del act
         await lisData.forEach((item,index) => {          
             btnDel = document.querySelector(`#hapus${index}`)
@@ -83,7 +104,7 @@ getData()
     }).catch(err => {console.error(err)})
 
 
-let dataCookie = JSON.parse(getCookie('_secure'))
-let loginData = document.querySelector('.userNow')
-loginData.innerHTML = dataCookie.result.username
+// let dataCookie = JSON.parse(getCookie('_secure'))
+// let loginData = document.querySelector('.userNow')
+// loginData.innerHTML = dataCookie.result.username
 

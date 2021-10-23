@@ -7,6 +7,7 @@ var Schema = new Mongoose.Schema(
     email: { type:String},
     age: { type:String},
     address: { type:String},
+    role: { type:String},
     }
 )
 

@@ -6,24 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIN</title>
     <link rel="stylesheet" href="/plugin/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/plugin/fontawesome/css/all.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <div class="row wrap-login">
-        <div class="col-md-12">
-            <h3 class="text-center head-login">Please Login</h3>
-        </div>
-        <div class="col-md-12">
-            <input class="input-style" type="text" name="username" id="username" placeholder="username">
-        </div>  
-        <div class="col-md-12">
-            <input class="input-style" type="password" name="password" id="password" placeholder="password">
-        </div> 
-        <div class="col-md-12">
-            <button class="btn btn-outline-custom w-100" id="btnLogin" class="btn btn-info">Masuk</button>
-        </div>       
-        <script type="text/javascript" src="/js/scriptlogin.js"></script>
-    </div>
-    
+    <div class="circle"><i class="fas fa-lock fa-2x padlock"></i></div>
+        <div class="wrap-login">
+            <div class="wrap-form">
+                <div class="row">        
+                    <div class="col-md-12 wrap-input">
+                        <input class="input-style" type="text" name="username" id="username" placeholder="username">
+                    </div>
+                </div>  
+                <div class="row">        
+                    <div class="col-md-12 wrap-input">
+                        <input class="input-style" type="password" name="password" id="password" placeholder="password">
+                    </div>
+                </div> 
+                <div class="row">        
+                    <div class="col-md-12 wrap-input">
+                        <button class="btn btn-custom w-100" id="btnLogin" class="btn btn-info">SIGN IN</button>
+                    </div>
+                </div>                
+            </div>              
+        </div>          
+
+    <script type="text/javascript" src="/js/scriptlogin.js"></script>
 </body>
 </html>
