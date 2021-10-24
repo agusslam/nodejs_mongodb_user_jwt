@@ -10,6 +10,15 @@ function getCookie(name) {
     return null;
 }
 
+function delete_cookie( name, path, domain ) {
+    if( getCookie( name ) ) {
+      document.cookie = name + "=" +
+        ((path) ? ";path="+path:"")+
+        ((domain)?";domain="+domain:"") +
+        ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+    }
+  }
+
 
 // script for fetching data all
 const getData = async () => {
@@ -56,6 +65,30 @@ getData()
                                     </tr>           
                                      `
             }); 
+            // btn del act
+            await lisData.forEach((item,index) => {          
+                btnDel = document.querySelector(`#hapus${index}`)
+                function klikDel(params){
+                    btnDel.addEventListener("click", async () => {
+                        let konfirm = confirm("Kamu yakin menghapus data ? ") 
+                        if(konfirm == true) {
+                            valID = document.querySelector(`#iduser${params}`).value 
+                            const rawResponse = await fetch('/user-api-delete', {
+                            method: 'POST',
+                            headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
+                                    },
+                            body: JSON.stringify({id: valID})
+                            });
+                            const content = await rawResponse.json();
+                            console.log(content)
+                            if(content.type == 200){location.reload()}
+                        }
+                    })
+                }
+                klikDel(index)
+            })
         }else{
             hideColAksi = document.querySelector('.col-aksi')
             hideColAksi.classList.add("hide");
@@ -71,40 +104,31 @@ getData()
                                     </tr>           
                                      `
             }); 
-        }
-              
-        // btn del act
-        await lisData.forEach((item,index) => {          
-            btnDel = document.querySelector(`#hapus${index}`)
-            function klikDel(params){
-                btnDel.addEventListener("click", async () => {
-                    let konfirm = confirm("Kamu yakin menghapus data ? ") 
-                    if(konfirm == true) {
-                        valID = document.querySelector(`#iduser${params}`).value 
-                        const rawResponse = await fetch('/user-api-delete', {
-                        method: 'POST',
-                        headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
-                                },
-                        body: JSON.stringify({id: valID})
-                        });
-                        const content = await rawResponse.json();
-                        console.log(content)
-                        if(content.type == 200){location.reload()}
-                    }
-                })
-            }
-            klikDel(index)
-        })
+        }            
+        
 
-        //btn tambah act
+        //btn logout act
+        btnLogout = document.querySelector('#logout')
+        btnLogout.addEventListener('click', async () => {
+            try {
+                let dataCookie = JSON.parse(getCookie('_SpaidRE'))
+                const logOut = await fetch('/user-api-logout', {
+                    method: 'POST',
+                    headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${dataCookie}`
+                            }
+                    }).then(response => {return response.json()}).catch(err => {return "error"})
+                if(logOut.auth == false) {
+                    delete_cookie('_SpaidRE')
+                    location.reload()
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        })
         
         
     }).catch(err => {console.error(err)})
-
-
-// let dataCookie = JSON.parse(getCookie('_secure'))
-// let loginData = document.querySelector('.userNow')
-// loginData.innerHTML = dataCookie.result.username
 

@@ -54,7 +54,7 @@ exports.login = async(req,res) => {
                     if(userData.password !== req.body.password){
                         res.status(400).send({ message: 'Failed Login', status: 400, auth: false })
                     }else {
-                        let token = jwt.sign({ username: userData.username }, 'keyRahasia-Bangetiniloh,jangn sampai bocor aduhhhhh')
+                        let token = jwt.sign({ username: userData.username }, 'keyRahasia-Bangetiniloh,jangn sampai bocor aduhhhhh', { expiresIn: '1h' })
                         let passingData = (token)
                         res.status(200).send({message: 'Success Login', status: 200, result: passingData});
                     }
@@ -62,6 +62,17 @@ exports.login = async(req,res) => {
             }
         }
         
+    } catch (error) {
+        res.send({message: error})
+    }    
+}
+
+exports.logout = async(req,res) => {
+    let tokenAuth = req.headers.authorization  
+    let newTokenAuth = tokenAuth.split(' ') 
+
+    try {
+        res.status(200).send({message: "Successfuly Logout", status: 200, auth: false})
     } catch (error) {
         res.send({message: error})
     }    
@@ -150,5 +161,9 @@ exports.vIndex = (req,res) => {
 
 exports.vLogin = (req,res) => {
     res.render('login')
+}
+
+exports.vHome = (req,res) => {
+    res.render('home')
 }
 

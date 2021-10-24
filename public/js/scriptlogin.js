@@ -34,14 +34,14 @@ btnLogin.addEventListener('click', async () => {
         }).then(response => {return response.json()}).catch(err => {return "error"})
         console.log(getUser)
         if(getUser.auth !== false){
-            alert("Great!! Successfuly Login")
             let dataCook = getUser.result
             // console.log(getUser)
             setCookie('_SpaidRE', JSON.stringify(dataCook),7)
             window.location.href = '/user-view'
         }else{
-            alert("Wrong Username/Password")
-            location.reload()
+            // location.reload()
+            alertDanger = document.querySelector('.alert')
+            alertDanger.setAttribute("class", "col-md-12 alert alert-danger show");            
         }
 })
 

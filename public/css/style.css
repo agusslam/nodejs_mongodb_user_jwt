@@ -1,79 +1,6 @@
 body {
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
-    font-family: 'Roboto', sans-serif;
-}
-
-.bg-custom {
-    background-color: #55ACEE;
-}
-
-.container-fluid .wrapper-contain {
-    margin-top: 25px;
-    margin-left: 5%;
-    margin-right: 5%;
-}
-
-.btn-outline-custom {
-    border-radius: 5px;
-    border: 1px solid #55ACEE;
-}
-
-.btn-outline-custom:hover {
-    border-radius: 5px;
-    border: 1px solid #ffffff;
-    background-color: #55ACEE ;
-}
-
-.container-fluid .table-list {
-    margin-top: 10px;
-}
-
-.contain-tambah {
-    margin-top: 10px;
-}
-
-.wrapper-input {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.list-table {
-    font-size: 14px;
-    text-align: center;
-}
-
-.btn-aksi {
-    text-decoration: none;
-    border-radius: 5px;
-    border: 1px solid green;
-    padding: 3px 3px;
-    color: black;
-    font-size: 10px;
-}
-.btn-aksi:hover {
-    text-decoration: none;
-    border-radius: 5px;
-    border: 1px solid rgba(0,129,52,0.5);
-    padding: 3px 3px;
-    color: black;
-    background-color: rgba(0,129,52,0.5);
-}
-
-.btn-aksi2 {
-    text-decoration: none;
-    border-radius: 5px;
-    border: 1px solid rgba(220,207,15,0.5);
-    padding: 3px 3px;
-    color: black;
-    font-size: 10px;
-}
-.btn-aksi2:hover {
-    text-decoration: none;
-    border-radius: 5px;
-    border: 1px solid rgba(220,207,15,0.5);
-    padding: 3px 3px;
-    color: black;
-    background-color: rgba(220,207,15,0.5);    
+    font-family: 'Roboto', sans-serif;    
 }
 
 .wrap-login {
@@ -83,7 +10,7 @@ body {
     margin-top: 10%;
     border-radius: 10px;
     padding: 10px;
-    height: 270px;
+    height: auto;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
@@ -91,6 +18,7 @@ body {
     margin-top: 55px;
     padding-left: 20px;
     padding-right: 20px;
+    height: auto;
 }
 
 .wrap-input {
@@ -132,3 +60,40 @@ body {
 .hide {
     display: none;
 }
+
+.show {
+    animation-name: alertshow;
+    animation-duration: 1.5s;
+}
+
+@keyframes alertshow {
+    from {opacity: 0;}
+    to {opacity: 100;}
+  }
+
+
+
+/* Content */
+.bg-nav {
+    background-color: #6fb555;
+    height: 70px;
+}
+
+.dropdown-menu {
+    margin-left: -150px;
+    text-align: end;
+}
+
+.wrapper-link {
+    padding-left: 10px;
+    width: 95%;
+}
+
+.wrapper-user {
+    width: 5%;
+}
+
+.wrapper-contain {
+    margin-top: 25px;
+}
+/* end content */
