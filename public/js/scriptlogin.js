@@ -37,7 +37,7 @@ btnLogin.addEventListener('click', async () => {
             let dataCook = getUser.result
             // console.log(getUser)
             setCookie('_SpaidRE', JSON.stringify(dataCook),7)
-            window.location.href = '/user-view'
+            window.location.href = '/user-home'
         }else{
             // location.reload()
             alertDanger = document.querySelector('.alert')

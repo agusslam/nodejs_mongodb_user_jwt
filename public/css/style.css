@@ -96,4 +96,17 @@ body {
 .wrapper-contain {
     margin-top: 25px;
 }
+
+.wrapper-list {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    text-align-last: center;
+    height: 180px;
+    border-bottom: 1px solid #6fb555;
+}
+
+/* .btn-aksi {
+    height: 50px;
+} */
 /* end content */
