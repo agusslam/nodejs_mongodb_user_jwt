@@ -163,7 +163,5 @@ exports.vLogin = (req,res) => {
     res.render('login')
 }
 
-exports.vHome = (req,res) => {
-    res.render('home')
-}
+
 

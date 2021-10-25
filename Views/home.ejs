@@ -20,7 +20,7 @@
               <div class="wrapper-link">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Add Product</a>
+                      <a class="nav-link" id="add-prod" href="#">Add Product</a>
                     </li>
                   </ul>
               </div>
@@ -31,10 +31,7 @@
                         <i class="fas fa-user-astronaut fa-2x"></i>
                       </a>
                       <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="#" id="btn-signout">Sign Out</a></li>
                       </ul>
                     </li>
                 </ul> 
@@ -55,12 +52,44 @@
                   <div class="col-md-3">Product Name</div>
                   <div class="col-md-1">Stock</div>
                   <div class="col-md-1">Price</div>
-                  <div class="col-md-2">Action</div>
+                  <div class="col-md-2 col-aksi">Action</div>
                 </div>
             </div>
             <div class="col-md-12 content-list">                
             </div>
         </div>
+        <div class="row wrapper-contain2 hide">
+          <div class="col-md-12 menu-add">
+              <h3 class="text-center">Update Product</h3>
+          </div>
+          <div class="col-md-12">
+              <div class="row wrapper-upd">
+                  <input type="hidden" id="id">
+                  <div class="col-md-6" id="img-upd"></div>
+                  <div class="col-md-6">
+                      <div class="mb-3">
+                          <label for="inputName" class="form-label">Product Name</label>
+                          <input type="text" class="form-control" id="inputName" name="nameprod">
+                      </div> 
+                      <div class="mb-3">
+                          <label for="inputStock" class="form-label">Stock</label>
+                          <input type="text" class="form-control" id="inputStock" name="stock">
+                      </div>
+                      <div class="mb-3">
+                          <label for="inputPrice" class="form-label">Price</label>
+                          <input type="text" class="form-control" id="inputPrice" name="price">
+                      </div>    
+                      <div class="mb-3">
+                          <label for="formFile" class="form-label">Image</label>
+                          <input class="form-control" type="file" id="formFile" name="img">
+                      </div> 
+                      <div class="mb-3">
+                          <button type="submit" class="btn btn-success" id="btn-submit">Submit</button>
+                      </div>                 
+                  </div>
+              </div>
+          </div>
+      </div>
         
     </div>
     <!-- End Container -->

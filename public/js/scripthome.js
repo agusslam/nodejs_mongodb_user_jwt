@@ -56,11 +56,11 @@ getData()
                                     <div class="row wrapper-list">
                                         <input type="hidden" id="iduser${index}" value="`+ item._id + `">
                                         <div class="col-md-1">${index+1}</div>
-                                        <div class="col-md-4">${item.img}</div>
+                                        <div class="col-md-4"><img class="img-style" src="/uploads/${item.img}"></div>
                                         <div class="col-md-3">${item.nameprod}</div>
                                         <div class="col-md-1">${item.stock}</div>
                                         <div class="col-md-1">${item.price}</div>
-                                        <div class="col-md-2"><button id="ubah${index}" class="btn-aksi">Update</button> | <button id="hapus${index}" class="btn-aksi2">Delete</button></div>
+                                        <div class="col-md-2"><button id="ubah${index}" class="btn btn-success">Update</button> | <button id="hapus${index}" class="btn btn-danger">Delete</button></div>
                                     </div>                                            
                                      `
             }); 
@@ -90,47 +90,99 @@ getData()
                 }
                 klikDel(index)
 
-                btnUpdate = document.querySelector(`#update${index}`)
+                btnUpdate = document.querySelector(`#ubah${index}`)
                 function klikUpd(params){
-                    btnDel.addEventListener("click", async () => {
-                        valID = document.querySelector(`#iduser${params}`).value 
-                        const rawResponse = await fetch('/product-api-update', {
-                        method: 'POST',
-                        headers: {
+                    btnUpdate.addEventListener("click", async () => {
+                        valID = document.querySelector(`#iduser${params}`).value
+                        console.log(valID)
+                        // document.querySelector('.wrapper-contain').classList.add('hide')
+                        // document.querySelector('.wrapper-contain2').classList.remove('hide')
+                        // document.querySelector('.wrapper-contain2').classList.add('show')
+                        const getRes = await fetch('/product-api-getid2',
+                        {
+                            method: 'GET',
+                            headers: {
                                 'Accept': 'application/json',
                                 'Content-Type': 'application/json',
                                 'Authorization': `Bearer ${dataCookie}`
-                                },
-                        body: JSON.stringify({id: valID})
-                        });
-                        const content = await rawResponse.json();
-                        console.log(content)
-                        if(content.type == 200){location.reload()}
+                            },
+                            body: JSON.stringify({id: valID})
+                        }).then(response => {return response.json()}).catch(err => {return err})
+                        // console.log(getRes)
+                        window.location.href = '/user-upd/'+ valID
+                        // document.querySelector('#img-upd').innerHTML = `<img class="img-upd" src="/uploads/${item.img}"></img>`
+                        // document.querySelector('#inputName').value = `${getRes.result.nameprod}`
+                        // document.querySelector('#inputStock').value = `${getRes.result.stock}`
+                        // document.querySelector('#inputPrice').value = `${getRes.result.price}`
+                        // document.querySelector('#id').value = `${getRes.result._id}`
                     })
                 }
-                klikUpd(index)
+                klikUpd(index)                
             })
-            
+            btnSub = document.querySelector('#btn-submit')
+                btnSub.addEventListener('click', async() => { 
+                    let dataCookie = JSON.parse(getCookie('_SpaidRE'))  
+                    valName = document.querySelector('#inputName').value
+                    valStock = document.querySelector('#inputStock').value
+                    valPrice = document.querySelector('#inputPrice').value
+                    valID = document.querySelector('#id').value
+                    let btnImg = document.querySelector('#formFile')
+
+                    let formData = new FormData()
+                    let photo = btnImg.files[0];                    
+                    // console.log(photo)
+                    if(photo == null || photo == undefined) {
+                        formData.append("id", valID)
+                        formData.append("nameprod", valName)
+                        formData.append("price", valPrice) 
+                        formData.append("stock", valStock)
+                    }else {
+                        let photo2 = btnImg.files[0].name;
+                        formData.append("image", photo)
+                        formData.append("id", valID)
+                        formData.append("nameprod", valName)
+                        formData.append("price", valPrice) 
+                        formData.append("stock", valStock) 
+                        formData.append("img", photo2) 
+                    }
+                    
+
+                    const ctrl = new AbortController()    // timeout
+                    setTimeout(() => ctrl.abort(), 5000);
+
+                    const rawResponse = await fetch('/product-api-update', {
+                    method: 'POST',
+                    headers: {'Authorization': `Bearer ${dataCookie}`},
+                    body: formData,
+                    signal: ctrl.signal
+                    }).then(response => {return response.json()}).catch(err => {return "error"})
+                    console.log(rawResponse)
+                    if(rawResponse.status == 200){ 
+                        location.reload()
+                    }
+                 })            
         }else{
             hideColAksi = document.querySelector('.col-aksi')
             hideColAksi.classList.add("hide");
+            hideAdd = document.querySelector('#add-prod')
+            hideAdd.classList.add("hide");
             await lisData.forEach((item,index) => {
                 getLis.innerHTML += `
-                                    <tr>
+                                    <div class="row wrapper-list">
                                         <input type="hidden" id="iduser${index}" value="`+ item._id + `">
-                                        <th scope="row">${index+1}</th>                                
-                                        <td>${item.username}</td>
-                                        <td>${item.email}</td>
-                                        <td>${item.age}</td>
-                                        <td>${item.address}</td>
-                                    </tr>           
+                                        <div class="col-md-1">${index+1}</div>
+                                        <div class="col-md-4"><img class="img-style" src="/uploads/${item.img}"></div>
+                                        <div class="col-md-3">${item.nameprod}</div>
+                                        <div class="col-md-1">${item.stock}</div>
+                                        <div class="col-md-1">${item.price}</div>
+                                    </div>            
                                      `
             }); 
         }            
         
 
-        //btn logout act
-        btnLogout = document.querySelector('#logout')
+        // btn logout act
+        btnLogout = document.querySelector('#btn-signout')
         btnLogout.addEventListener('click', async () => {
             try {
                 let dataCookie = JSON.parse(getCookie('_SpaidRE'))

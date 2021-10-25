@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD AUTH</title>
+    <link rel="stylesheet" href="/plugin/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/plugin/fontawesome/css/all.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-nav">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">LOGO</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse nav-align" id="navbarSupportedContent">
+              <div class="wrapper-link">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Add Product</a>
+                    </li>
+                  </ul>
+              </div>
+              <div class="wrapper-user">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-astronaut fa-2x"></i>
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                      </ul>
+                    </li>
+                </ul> 
+              </div>
+                         
+          </div>
+        </div>
+      </nav>
+      <div class="container-fluid">
+        <div class="row wrapper-contain2">
+            <div class="col-md-12 menu-add">
+                <h4>Update Product</h4>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4"><img src="/uploads/<%= result.img %>"></div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="inputName" class="form-label">Product Name</label>
+                            <input type="text" class="form-control" id="inputName" name="nameprod" value="<%= result.nameprod %>">
+                        </div> 
+                        <div class="mb-3">
+                            <label for="inputStock" class="form-label">Stock</label>
+                            <input type="text" class="form-control" id="inputStock" name="stock" value="<%= result.stock %>">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputPrice" class="form-label">Price</label>
+                            <input type="text" class="form-control" id="inputPrice" name="price" value="<%= result.price %>">
+                        </div>    
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Image</label>
+                            <input class="form-control" type="file" id="formFile" name="img">
+                        </div> 
+                        <div class="mb-3">
+                            <button class="btn btn-success">Submit</button>
+                        </div>                 
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!-- End Container -->
+    <script type="text/javascript" src="/plugin/bootstrap/js/bootstrap.bundle.js"></script>
+    <!-- <script type="text/javascript" src="/js/scriptupd.js"></script> -->
+</body>
+</html>
