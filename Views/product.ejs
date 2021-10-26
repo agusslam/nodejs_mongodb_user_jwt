@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Catalogue Product</title>
+    <link rel="stylesheet" href="/plugin/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/plugin/fontawesome/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style-new.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light nav-custom">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">LOGO</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item dropdown wrap-usermenu">
+                <img class="avatar" src="/img/avatar.jpg">
+                <a class="nav-link dropdown-toggle nav-wid" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Nama User
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#" id="btn-signout">Sign-Out</a></li>
+                </ul>
+              </li>
+          </div>
+        </div>
+      </nav>
+
+      <!-- start content -->
+      <div class="container-fluid">
+
+        <div class="row head-text">
+            <div class="col-md-9 left">
+                <h3>Hi,Welcome Back!</h3>
+            </div> 
+            <div class="col-md-3 right">
+                <p class="dateP">Tuesday, 26 Oct 2021</p>
+            </div>   
+        </div>
+
+        <div class="row banner">
+            <div class="col-md-9 banner-left">
+                <div class="row wrapper-banner-left">
+                    <div class="col-md-3 img-left" style="background-image: url(/img/member.png);"></div>
+                    <div class="col-md-9 text-left">
+                        <h3>upload and sell your product easy</h3>
+                        <p>Order in for yourself or for the group, with no restrictions on order value</p></div>
+                </div>
+            </div>
+            <div class="col-md-3 banner-right">
+                <div class="wrapper-search">
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search Your Product" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div> 
+
+        <div class="row list-product">
+            <div class="col-md-12 head-list">
+                <div class="row wrap-head-list">
+                    <div class="col-md-10"><h4>Your Product</h4></div>
+                    <div class="col-md-2"><button type="submit" id="tambah" class="btn-tambah">Add new product</button></div>
+                </div>
+                
+            </div>
+            <div class="col-md-12 title-list">
+                <div class="row wrap-title-list">
+                    <div class="col-md-6">
+                        <h5>Item details</h5>                       
+                    </div>
+                    <div class="col-md-2">
+                        <h5>Quantity</h5>
+                    </div>
+                    <div class="col-md-2">
+                        <h5>Price</h5>
+                    </div>
+                    <div class="col-md-2">
+                        <h5>Action</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 content-list">
+                <!-- Lis content here  -->
+            </div>
+        </div>
+
+        <div class="row footer">
+            <div class="col-md-12 wrapper-footer">
+                <p>https://github.com/</p><p class="agusslam">agusslam</p><p>/nodejs_mongodb_user_jwt.git</p>
+            </div>
+        </div>
+
+
+      </div>
+      <!-- End content -->
+
+
+
+
+      <script type="text/javascript" src="/plugin/bootstrap/js/bootstrap.bundle.js"></script>
+      <script type="text/javascript" src="/js/scriptproduct.js"></script>
+</body>
+</html>

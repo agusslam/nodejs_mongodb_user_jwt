@@ -21,9 +21,11 @@ routes.post('/user-api-logout', verifyToken.verifyToken, userControl.logout)
 routes.get('/product-api-get', verifyToken.verifyToken, productControl.getProduct)
 routes.post('/product-api-post', verifyToken.verifyToken, productControl.newProduct)
 routes.post('/product-api-delete', verifyToken.verifyToken, productControl.delProduct)
-routes.post('/product-api-update', verifyToken.verifyToken, productControl.updProduct)
+routes.post('/product-api-update/:id', verifyToken.verifyToken, productControl.updProduct)
 routes.post('/product-api-getid', verifyToken.verifyToken, productControl.getId)
 routes.get('/product-api-getid2', verifyToken.verifyToken, productControl.vUpd)
+routes.get('/product-api-new', verifyToken.verifyToken, productControl.vNew)
+routes.post('/product-api-add', verifyToken.verifyToken, productControl.addProduct)
 
 //FRONTEND
 routes.get('/user-view', userControl.vIndex)
@@ -32,5 +34,12 @@ routes.get('/user-login', userControl.vLogin)
 //FRONTEND CRUD AUTH
 routes.get('/user-home', productControl.vHome)
 routes.get('/user-upd/:id', productControl.getId2)
+
+//FRONTEND NEW
+routes.get('/product-home', productControl.vHomeProduct)
+routes.get('/product-login', productControl.vLoginProduct)
+routes.get('/product-add', productControl.vNewProduct)
+routes.get('/product-upd/:id', productControl.vGetId)
+routes.get('/product-detail/:id', productControl.vDetId)
 
 module.exports = routes

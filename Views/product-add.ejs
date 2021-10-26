@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Catalogue Product</title>
+    <link rel="stylesheet" href="/plugin/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/plugin/fontawesome/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style-new.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light nav-custom">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">LOGO</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item dropdown wrap-usermenu">
+                <img class="avatar" src="/img/avatar.jpg">
+                <a class="nav-link dropdown-toggle nav-wid" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Nama User
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#" id="btn-signout">Sign-Out</a></li>
+                </ul>
+              </li>
+          </div>
+        </div>
+      </nav>
+
+      <!-- start content -->
+      <div class="container-fluid">
+
+        <div class="row head-text">
+            <div class="col-md-9 left">
+                <h3>Great! Now time to add your product</h3>
+            </div> 
+            <div class="col-md-3 right">
+                <p class="dateP">Tuesday, 26 Oct 2021</p>
+            </div>   
+        </div>
+
+        <div class="row alert-add hide" id="alert-add-success">
+            <div class="alert alert-success " role="alert">
+                Congratulation...your product saved. Thank You!
+            </div>
+        </div>
+        <div class="row alert-add hide" id="alert-add-danger">
+            <div class="alert alert-danger" role="alert">
+                Ohhh No!!!....Somethink Error..
+            </div>
+        </div>
+
+        <div class="row add-prod">
+            <div class="col-md-5 add-prod-left">
+                <div class="wrapper-img-add" style="background-image: url(/img/add.png);"></div>
+            </div>
+            <div class="col-md-7 add-prod-right">
+                <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="inputName" class="form-label">Product Name</label>
+                                <input type="text" class="form-control" id="inputName" name="nameprod">
+                            </div> 
+                            <div class="mb-3">
+                                <label for="inputStock" class="form-label">Quantity</label>
+                                <input type="text" class="form-control" id="inputStock" name="stock">
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputPrice" class="form-label">Price</label>
+                                <input type="text" class="form-control" id="inputPrice" name="price">
+                            </div>    
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Image</label>
+                                <input class="form-control" type="file" id="formFile" name="img">
+                            </div> 
+                            <div class="mb-3">
+                                <button type="submit" class="btn-tambah" id="btn-submit">Submit</button>
+                                <button type="submit" class="btn-del" id="btn-back">Back</button>
+                            </div>                 
+                        </div>         
+                </div>
+            </div>
+        </div> 
+
+        <div class="row footer">
+            <div class="col-md-12 wrapper-footer">
+                <p>https://github.com/</p><p class="agusslam">agusslam</p><p>/nodejs_mongodb_user_jwt.git</p>
+            </div>
+        </div>
+
+
+      </div>
+      <!-- End content -->
+
+
+
+
+      <script type="text/javascript" src="/plugin/bootstrap/js/bootstrap.bundle.js"></script>
+      <script type="text/javascript" src="/js/scriptadd.js"></script>
+</body>
+</html>

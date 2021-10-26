@@ -24,20 +24,20 @@ btnLogin.addEventListener('click', async () => {
         return null;
     }
 
-    const getUser = await fetch('/user-api-login', {
+        const getUser = await fetch('/user-api-login', {
         method: 'POST',
         headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 },
         body: JSON.stringify({username: username, password: password})
-        }).then(response => {return response.json()}).catch(err => {return "error"})
+        }).then(response => {return response.json()}).catch(err => {return err})
         console.log(getUser)
         if(getUser.auth !== false){
             let dataCook = getUser.result
             // console.log(getUser)
             setCookie('_SpaidRE', JSON.stringify(dataCook),7)
-            window.location.href = '/user-home'
+            window.location.href = '/product-home'
         }else{
             // location.reload()
             alertDanger = document.querySelector('.alert')
