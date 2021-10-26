@@ -19,6 +19,30 @@ function delete_cookie( name, path, domain ) {
     }
   }
 
+  //button img diambil
+  btnImg = document.querySelector('#formFile')
+  btnImg.addEventListener('change', async() => {
+      let dataCookie = JSON.parse(getCookie('_SpaidRE'))
+      photo = btnImg.files[0]
+      const formData = new FormData()
+      formData.append('image', photo);
+      const addNew = await fetch('/product-api-upload', {
+          method: 'POST',
+          headers: {
+                  'Authorization': `Bearer ${dataCookie}`
+                  },
+          body: formData
+          }).then(response => {return response.json()}).catch(err => {return err})
+      console.log(addNew)
+      if(addNew.status == 200) {
+          document.querySelector('#alert-upload-success').classList.remove('hide')
+          document.querySelector('#alert-upload-success').classList.add('show')
+      }else {
+          document.querySelector('#alert-upload-danger').classList.remove('hide')
+          document.querySelector('#alert-upload-danger').classList.add('show')
+      }
+  })
+
   btnSub = document.querySelector('#btn-submit')
   btnSub.addEventListener('click', async() => { 
       let dataCookie = JSON.parse(getCookie('_SpaidRE'))  
@@ -26,9 +50,10 @@ function delete_cookie( name, path, domain ) {
       valStock = document.querySelector('#inputStock').value
       valPrice = document.querySelector('#inputPrice').value
       valID = document.querySelector('#id').value
-      // let btnImg = document.querySelector('#formFile')
+      let btnImg = document.querySelector('#formFile')
 
-      // let photo = btnImg.files[0].name;
+      if(btnImg.files[0] == null || btnImg.files[0] == undefined){ valImg = null }
+      else { valImg = btnImg.files[0].name }      
 
       const updId = await fetch('/product-api-update/' + valID, {
           method: 'POST',
@@ -41,13 +66,14 @@ function delete_cookie( name, path, domain ) {
               nameprod: valName, 
               stock: valStock,
               price: valPrice,
-              // img: photo
+              img: valImg
           })
           }).then(response => {return response.json()}).catch(err => {return err})
           console.log(updId)
           if(updId.status == 200) {
               document.querySelector('#alert-add-success').classList.remove('hide')
               document.querySelector('#alert-add-success').classList.add('show')
+              setTimeout(function(){ location.reload() }, 1500);
           }else {
               location.reload()
               document.querySelector('#alert-add-danger').classList.remove('hide')

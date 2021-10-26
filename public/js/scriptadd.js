@@ -17,41 +17,62 @@ function delete_cookie( name, path, domain ) {
         ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
     }
 }
+    //button img diambil
+    btnImg = document.querySelector('#formFile')
+    btnImg.addEventListener('change', async() => {
+        let dataCookie = JSON.parse(getCookie('_SpaidRE'))
+        photo = btnImg.files[0]
+        const formData = new FormData()
+        formData.append('image', photo);
+        const addNew = await fetch('/product-api-upload', {
+            method: 'POST',
+            headers: {
+                    'Authorization': `Bearer ${dataCookie}`
+                    },
+            body: formData
+            }).then(response => {return response.json()}).catch(err => {return err})
+        console.log(addNew)
+        if(addNew.status == 200) {
+            document.querySelector('#alert-upload-success').classList.remove('hide')
+            document.querySelector('#alert-upload-success').classList.add('show')
+        }else {
+            document.querySelector('#alert-upload-danger').classList.remove('hide')
+            document.querySelector('#alert-upload-danger').classList.add('show')
+        }
+    })
 
     btnSub = document.querySelector('#btn-submit')
     btnSub.addEventListener('click', async() => { 
-        let dataCookie = JSON.parse(getCookie('_SpaidRE'))  
+        let dataCookie = JSON.parse(getCookie('_SpaidRE')) 
+        let btnImg = document.querySelector('#formFile')
         valName = document.querySelector('#inputName').value
         valStock = document.querySelector('#inputStock').value
-        valPrice = document.querySelector('#inputPrice').value
-        let btnImg = document.querySelector('#formFile')
+        valPrice = document.querySelector('#inputPrice').value        
+        valImg = btnImg.files[0].name
 
-        let photo = btnImg.files[0].name;
-
-        const addNew = await fetch('/product-api-add', {
-            method: 'POST',
-            headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${dataCookie}`
-                    },
-            body: JSON.stringify({
+        const postAdd = await fetch('/product-api-add', {
+        method: 'POST',
+        headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${dataCookie}`
+                },
+        body: JSON.stringify({
                 nameprod: valName, 
                 stock: valStock,
                 price: valPrice,
-                img: photo
+                img: valImg
             })
-            }).then(response => {return response.json()}).catch(err => {return err})
-            console.log(addNew)
-            if(addNew.status == 200) {
+        }).then(response => {return response.json()}).catch(err => {return err})
+            // console.log(addNew)
+            if(postAdd.status == 200) {
                 document.querySelector('#alert-add-success').classList.remove('hide')
                 document.querySelector('#alert-add-success').classList.add('show')
             }else {
                 document.querySelector('#alert-add-danger').classList.remove('hide')
                 document.querySelector('#alert-add-danger').classList.add('show')
             }
-        })
-        
+        })        
 
     btnBac = document.querySelector('#btn-back')
     btnBac.addEventListener('click', () => { window.location.href = '/product-home' })

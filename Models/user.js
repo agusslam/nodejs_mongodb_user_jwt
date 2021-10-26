@@ -4,6 +4,7 @@ var Schema = new Mongoose.Schema(
     {
     username:{ type:String },
     password: { type:String },
+    nama: { type:String },
     email: { type:String},
     age: { type:String},
     address: { type:String},

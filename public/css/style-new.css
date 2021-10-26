@@ -137,6 +137,7 @@ body {
     height: 80px;
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    border-radius: 5px;
 }
 
 .text-items {
@@ -287,7 +288,7 @@ margin-left: 3%;
 
 .wrapper-img-add {
     height: 350px;
-    background-size: contain;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     border-radius: 10px;
     margin-top: 25px;

@@ -26,6 +26,8 @@ routes.post('/product-api-getid', verifyToken.verifyToken, productControl.getId)
 routes.get('/product-api-getid2', verifyToken.verifyToken, productControl.vUpd)
 routes.get('/product-api-new', verifyToken.verifyToken, productControl.vNew)
 routes.post('/product-api-add', verifyToken.verifyToken, productControl.addProduct)
+routes.post('/product-api-upload', verifyToken.verifyToken, productControl.uploadProduct)
+routes.post('/product-api-cek', verifyToken.verifyToken, productControl.cekToken)
 
 //FRONTEND
 routes.get('/user-view', userControl.vIndex)

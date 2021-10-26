@@ -46,9 +46,10 @@ const getData = async () => {
 getData()
     .then(async allData => {
         const getLis = document.querySelector('.content-list')        
-        let lisData = allData.result
-        // console.log(allData.auth)
+        let lisData = allData.result.data
+        console.log(allData)
         //show List Data
+        document.querySelector('#navbarDropdown').innerHTML = allData.result.name
         if(allData.auth == 'member'){
             await lisData.forEach((item,index) => {
                 getLis.innerHTML += `
@@ -140,49 +141,7 @@ getData()
                     }else {
                         window.location.href = '/product-home'
                     }
-                })
-            // btnSub = document.querySelector('#btn-submit')
-            //     btnSub.addEventListener('click', async() => { 
-            //         let dataCookie = JSON.parse(getCookie('_SpaidRE'))  
-            //         valName = document.querySelector('#inputName').value
-            //         valStock = document.querySelector('#inputStock').value
-            //         valPrice = document.querySelector('#inputPrice').value
-            //         valID = document.querySelector('#id').value
-            //         let btnImg = document.querySelector('#formFile')
-
-            //         let formData = new FormData()
-            //         let photo = btnImg.files[0];                    
-            //         // console.log(photo)
-            //         if(photo == null || photo == undefined) {
-            //             formData.append("id", valID)
-            //             formData.append("nameprod", valName)
-            //             formData.append("price", valPrice) 
-            //             formData.append("stock", valStock)
-            //         }else {
-            //             let photo2 = btnImg.files[0].name;
-            //             formData.append("image", photo)
-            //             formData.append("id", valID)
-            //             formData.append("nameprod", valName)
-            //             formData.append("price", valPrice) 
-            //             formData.append("stock", valStock) 
-            //             formData.append("img", photo2) 
-            //         }
-                    
-
-            //         const ctrl = new AbortController()    // timeout
-            //         setTimeout(() => ctrl.abort(), 5000);
-
-            //         const rawResponse = await fetch('/product-api-update', {
-            //         method: 'POST',
-            //         headers: {'Authorization': `Bearer ${dataCookie}`},
-            //         body: formData,
-            //         signal: ctrl.signal
-            //         }).then(response => {return response.json()}).catch(err => {return "error"})
-            //         console.log(rawResponse)
-            //         if(rawResponse.status == 200){ 
-            //             location.reload()
-            //         }
-            //      })            
+                })       
         }else{
             document.querySelector('#tambah').classList.add('hide')
             await lisData.forEach((item,index) => {

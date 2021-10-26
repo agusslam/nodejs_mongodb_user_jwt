@@ -5,16 +5,21 @@ const uploadImg = require('../Controllers/upload')
 const fs = require('fs')
 var FormData = require('form-data');
 
-exports.getProduct = async(req,res) => {    
-    //data yg dikeluarkan bisa apa aja
+
+exports.getProduct = async(req,res) => {
     try {
         const userSearch = await userModel.findOne({username: req.userId})
         if(userSearch.role == "member"){
             const allData = await productModel.find({uip: req.userId})
-            res.status(200).send({auth: "member", result:allData})
+            res.status(200).send({auth: "member", 
+                                  result:{
+                                    name: userSearch.nama,
+                                    data: allData
+                                  }
+                                })
         }else{
             const allData = await productModel.find()
-            res.status(200).send({auth: "guest", result:allData})
+            res.status(200).send({auth: "guest", result:{name: userSearch.nama, data: allData}})
         }                    
     } catch (error) {
         res.status(500).send({ message: `failed get data ${error.message}`, status: 500 })
@@ -52,11 +57,19 @@ exports.addProduct = async (req,res) => {
         nameprod: req.body.nameprod,
         stock: req.body.stock,
         price: req.body.price,
-    })    
-    try {
-        // await uploadImg(req, res)
+    })
+    try {   
         const product = await productPost.save()
         res.status(200).send({ message: "Success Post Data", status: 200, result: product });
+    } catch (error) {
+        res.status(400).send({ message: `Failed : ${error}` });
+    }
+}
+
+exports.uploadProduct = async (req,res) => {
+    try {   
+        await uploadImg(req,res)        
+        res.status(200).send({ message: "Success Upload Image", status: 200 });
     } catch (error) {
         res.status(400).send({ message: `Failed : ${error}` });
     }
@@ -73,26 +86,23 @@ exports.delProduct = async(req,res) => {
 
 exports.updProduct = async(req,res) => {
     try {               
-        // console.log(req.params.id)
-        // const imgAda = await productModel.findOne({_id: req.body.id}) 
-        // console.log(req.body.nameprod)
-        // if(imgAda.img !== null || imgAda.img !== undefined){
-        //     let path = `./public/uploads/${imgAda.img}`
-        //     console.log(imgAda.img)
-        //     await fs.unlink(path, (err) => {
-        //         if(err){ console.log(err) }
-        //         console.log('File deleted!')
-        //     })
-        // }
-        // await uploadImg(req, res)
-
-        const updId = await productModel.updateOne({ _id: req.params.id },{
-            $set: { 
-                nameprod: req.body.nameprod, 
-                stock: req.body.stock, 
-                price: req.body.price 
+        if(req.body.img == null || req.body.img == undefined){
+            data = { nameprod: req.body.nameprod, stock: req.body.stock, price: req.body.price }
+        }else { 
+            const imgAda = await productModel.findOne({_id: req.params.id})
+            if(imgAda.img !== null || imgAda.img !== undefined){
+                let path = `./public/uploads/${imgAda.img}`
+                // console.log(imgAda.img)
+                await fs.unlink(path, (err) => {
+                    if(err){ console.log(err) }
+                    // console.log('File deleted!')
+                })
             }
-        }, {upsert: true})
+            
+            data = { nameprod: req.body.nameprod, stock: req.body.stock, price: req.body.price, img: req.body.img 
+        }}
+
+        const updId = await productModel.updateOne({ _id: req.params.id },{ $set: data }, {upsert: true})
         res.status(200).send({ message: "Success Update", status: 200 })     
     } catch (error) {
         res.status(400).send({message: `Error : ${error}`, status: 400})
@@ -137,13 +147,17 @@ exports.updProduct2 = async(req,res) => {
     res.render('update')
 }
 
+exports.cekToken = async(req,res) => {
+    res.status(200).send({ status: 200, auth: true })
+}
+
 //FRONT END NEW
 exports.vHomeProduct = (req,res) => {
     res.render('product')
 }
 
 exports.vLoginProduct = (req,res) => {
-    res.render('product-login')
+    res.render('product-login', { status: 200, auth: true })
 }
 
 exports.vNewProduct = (req,res) => {

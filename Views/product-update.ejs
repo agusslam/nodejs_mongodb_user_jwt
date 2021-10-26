@@ -51,9 +51,19 @@
                 Congratulation...your product saved. Thank You!
             </div>
         </div>
+        <div class="row alert-add hide" id="alert-upload-success">
+            <div class="alert alert-success" role="alert">
+                Your Image successfully Uploaded !!
+            </div>
+        </div>
         <div class="row alert-add hide" id="alert-add-danger">
             <div class="alert alert-danger" role="alert">
                 Ohhh No!!!....Somethink Error..
+            </div>
+        </div>
+        <div class="row alert-add hide" id="alert-upload-danger">
+            <div class="alert alert-danger" role="alert">
+                Ohhh No!!!....Failed Upload !!
             </div>
         </div>
 
@@ -64,7 +74,7 @@
             <div class="col-md-7 add-prod-right">
                 <div class="row">
                         <div class="col-md-12">
-                            <input type="hidden" id="id" value="<%= result._id %>"
+                            <input type="hidden" id="id" value="<%= result._id %>">
                             <div class="mb-3">
                                 <label for="inputName" class="form-label">Product Name</label>
                                 <input type="text" class="form-control" id="inputName" name="nameprod" value="<%= result.nameprod %>">
