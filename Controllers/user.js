@@ -47,7 +47,7 @@ exports.login = async(req,res) => {
             if( (req.body.username === '' || req.body.username === null) || (req.body.password === '' || req.body.password === null)){
                 res.status(400).send({ message: 'Failed Login', status: 400, auth: false })
             }else {
-                const userData = await userModel.findOne({username: req.body.username})
+                const userData = await userModel.findOne({username: req.body.username, password: req.body.password})
                 if(userData === null){
                     res.status(400).send({ message: 'Failed Login', status: 400, auth: false })
                 }else {
@@ -152,6 +152,11 @@ exports.userData2 = async(req,res) => {
                 // .catch(err => {
                 //     res.status(500).send({ message: `failed get data`, status: 500 })
                 // })
+}
+
+exports.cekToken = async(req,res) => {
+    const userSearch = await userModel.findOne({username: req.userId})
+    res.status(200).send({name: userSearch.nama, role: userSearch.role})
 }
 
 //FRONT END

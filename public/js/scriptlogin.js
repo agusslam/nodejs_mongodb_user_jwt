@@ -18,33 +18,38 @@ function getCookie(name) {
     }
     return null;
 }
-      
+
+    //cek cookies 
+    let dataCookie = JSON.parse(getCookie('_SpaidRE'))
+    console.log(dataCookie)
+    if(dataCookie !== null) { window.location.href = '/product-home'}
+    
     let btnLogin = document.querySelector('#btnLogin')
 
-    btnLogin.addEventListener('click', async () => {
-        let username = document.querySelector('#username').value
-        let password = document.querySelector('#password').value        
-    
-            const getUser = await fetch('/user-api-login', {
-            method: 'POST',
-            headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    },
-            body: JSON.stringify({username: username, password: password})
-            }).then(response => {return response.json()}).catch(err => {return err})
-            console.log(getUser)
-            if(getUser.auth !== false){
-                let dataCook = getUser.result
-                // console.log(getUser)
-                setCookie('_SpaidRE', JSON.stringify(dataCook),7)
-                window.location.href = '/product-home'
-            }else{
-                // location.reload()
-                alertDanger = document.querySelector('.alert')
-                alertDanger.setAttribute("class", "col-md-12 alert alert-danger show");            
-            }
-    })
+        btnLogin.addEventListener('click', async () => {
+            let username = document.querySelector('#username').value
+            let password = document.querySelector('#password').value        
+        
+                const getUser = await fetch('/user-api-login', {
+                method: 'POST',
+                headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        },
+                body: JSON.stringify({username: username, password: password})
+                }).then(response => {return response.json()}).catch(err => {return err})
+                console.log(getUser)
+                if(getUser.auth !== false){
+                    let dataCook = getUser.result
+                    // console.log(getUser)
+                    setCookie('_SpaidRE', JSON.stringify(dataCook),7)
+                    window.location.href = '/product-home'
+                }else{
+                    // location.reload()
+                    alertDanger = document.querySelector('.alert')
+                    alertDanger.setAttribute("class", "col-md-12 alert alert-danger show");            
+                }
+        })
 
 
 

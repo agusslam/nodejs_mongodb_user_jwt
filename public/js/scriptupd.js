@@ -19,6 +19,33 @@ function delete_cookie( name, path, domain ) {
     }
   }
 
+    let fulldate = new String();
+    let dayname = ("Sunday Monday Tuesday Wednesday Thursday Friday Saturday");
+    daynames = dayname.split(" ");
+    let months = ("Jan Februari Mar April May Jun Jul Aug Sept Oct Nov Dec");
+    months = months.split(" ");
+    let datenow = new Date();
+    let day = datenow.getDay();
+    let date = datenow.getDate();
+    let month = datenow.getMonth();
+    let year = datenow.getFullYear();
+    // console.log(day)
+    fulldate = daynames[day] + ", " +date + " " + months[month] + " " + year;
+    document.querySelector('.dateP').innerHTML = fulldate
+
+    //get username
+    getInfo = async() => {
+        let dataCookie = JSON.parse(getCookie('_SpaidRE'))
+        const getIn = await fetch('/user-api-cek', {
+            method: 'GET',
+            headers: {
+                    'Authorization': `Bearer ${dataCookie}`
+                    },
+            }).then(response => {return response.json()}).catch(err => {return err})
+        document.querySelector('#navbarDropdown').innerHTML = getIn.name
+    }
+    getInfo()
+
   //button img diambil
   btnImg = document.querySelector('#formFile')
   btnImg.addEventListener('change', async() => {
@@ -33,7 +60,7 @@ function delete_cookie( name, path, domain ) {
                   },
           body: formData
           }).then(response => {return response.json()}).catch(err => {return err})
-      console.log(addNew)
+    //   console.log(addNew)
       if(addNew.status == 200) {
           document.querySelector('#alert-upload-success').classList.remove('hide')
           document.querySelector('#alert-upload-success').classList.add('show')
@@ -69,7 +96,7 @@ function delete_cookie( name, path, domain ) {
               img: valImg
           })
           }).then(response => {return response.json()}).catch(err => {return err})
-          console.log(updId)
+        //   console.log(updId)
           if(updId.status == 200) {
               document.querySelector('#alert-add-success').classList.remove('hide')
               document.querySelector('#alert-add-success').classList.add('show')

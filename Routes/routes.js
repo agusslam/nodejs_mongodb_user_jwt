@@ -16,6 +16,7 @@ routes.post('/user-api-post', userControl.new)
 routes.post('/user-api-delete', userControl.del)
 routes.post('/user-api-login', userControl.login)
 routes.post('/user-api-logout', verifyToken.verifyToken, userControl.logout)
+routes.get('/user-api-cek', verifyToken.verifyToken, userControl.cekToken)
 
 //API PRODUCT
 routes.get('/product-api-get', verifyToken.verifyToken, productControl.getProduct)
@@ -27,7 +28,7 @@ routes.get('/product-api-getid2', verifyToken.verifyToken, productControl.vUpd)
 routes.get('/product-api-new', verifyToken.verifyToken, productControl.vNew)
 routes.post('/product-api-add', verifyToken.verifyToken, productControl.addProduct)
 routes.post('/product-api-upload', verifyToken.verifyToken, productControl.uploadProduct)
-routes.post('/product-api-cek', verifyToken.verifyToken, productControl.cekToken)
+routes.post('/product-api-search', verifyToken.verifyToken, productControl.productSearch)
 
 //FRONTEND
 routes.get('/user-view', userControl.vIndex)

@@ -77,6 +77,14 @@ exports.uploadProduct = async (req,res) => {
 
 exports.delProduct = async(req,res) => {
     try {
+        //delete img exist
+        const imgAda = await productModel.findOne({_id: req.body.id})
+        let path = `./public/uploads/${imgAda.img}`
+        await fs.unlink(path, (err) => {
+            if(err){ console.log(err) }
+            // console.log('File deleted!')
+        })
+
         const productDel = await productModel.deleteOne({ _id: req.body.id })
         res.send({message: "Success Delete Data", type: 200, result: productDel });
     } catch (error) {
@@ -128,6 +136,27 @@ exports.getId2 = async(req,res) => {
     } catch (error) {
         res.status(400).send({message: "Failed Get ID", status: 400})
     }
+}
+
+exports.productSearch = (req,res) => {
+    let keySearch = req.body.key
+    // console.log(keySearch)
+    userModel.find(
+        {
+            nama: { $regex: keySearch }
+        }
+    ).then(response => {
+        res.render('product', 
+            {
+            message: "search",
+            result: response
+            }
+        )  
+    }).catch(err => {
+        res.send({
+            message: `Failed Get By Key Search ${err}`
+        })
+    })
 }
 
 //FRONT END

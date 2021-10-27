@@ -1,3 +1,18 @@
+let fulldate = new String();
+let dayname = ("Sunday Monday Tuesday Wednesday Thursday Friday Saturday");
+daynames = dayname.split(" ");
+let months = ("Jan Februari Mar April May Jun Jul Aug Sept Oct Nov Dec");
+months = months.split(" ");
+let datenow = new Date();
+let day = datenow.getDay();
+let date = datenow.getDate();
+let month = datenow.getMonth();
+let year = datenow.getFullYear();
+// console.log(day)
+fulldate = daynames[day] + ", " +date + " " + months[month] + " " + year;
+
+document.querySelector('.dateP').innerHTML = fulldate
+
 function getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -18,6 +33,7 @@ function delete_cookie( name, path, domain ) {
     }
   }
 
+//
 // script for fetching data all
 const getData = async () => {
     try {
