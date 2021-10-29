@@ -156,7 +156,7 @@ exports.userData2 = async(req,res) => {
 
 exports.cekToken = async(req,res) => {
     const userSearch = await userModel.findOne({username: req.userId})
-    res.status(200).send({name: userSearch.nama, role: userSearch.role})
+    res.status(200).send({status: 200, name: userSearch.nama, role: userSearch.role})
 }
 
 //FRONT END

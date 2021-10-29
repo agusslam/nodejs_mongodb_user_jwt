@@ -19,11 +19,26 @@ function getCookie(name) {
     return null;
 }
 
-    //cek cookies 
-    let dataCookie = JSON.parse(getCookie('_SpaidRE'))
-    console.log(dataCookie)
-    if(dataCookie !== null) { window.location.href = '/product-home'}
-    
+    //get username
+    getInfo = async() => {
+        let dataCookie = JSON.parse(getCookie('_SpaidRE'))
+        if(dataCookie !== null){
+            const getIn = await fetch('/user-api-cek', {
+                method: 'GET',
+                headers: {
+                        'Authorization': `Bearer ${dataCookie}`
+                        },
+                }).then(response => {return response.json()}).catch(err => {return err})
+                if(getIn.status == 200){ 
+                    window.location.href = '/product-home' 
+                }else{
+                    delete_cookie('_SpaidRE')
+                    location.reload()
+                }
+        }        
+    }
+    getInfo()
+      
     let btnLogin = document.querySelector('#btnLogin')
 
         btnLogin.addEventListener('click', async () => {
